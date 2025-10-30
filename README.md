@@ -16,14 +16,13 @@ Users can visualize population dynamics through custom animated ecosystem visual
 ### Prerequisites
 - Node.js 18+ 
 - npm or yarn
-- MongoDB (local or cloud instance)
 
 ### Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ecosystem-sandbox.git
-cd ecosystem-sandbox
+git clone https://github.com/MuhammadMaaz64/nuel-submission
+cd into the folder
 ```
 
 2. Install dependencies:
@@ -40,8 +39,6 @@ npm install
 3. Set up environment variables:
 ```bash
 # In backend directory, create .env file
-cp .env.example .env
-# Edit .env with your MongoDB connection string
 ```
 
 4. Run the application:
@@ -55,13 +52,7 @@ cd frontend
 npm run dev
 ```
 
-5. Open http://localhost:5173 in your browser
 
-### Docker Setup (Alternative)
-
-```bash
-docker-compose up
-```
 
 ## 🏗️ Architecture
 
@@ -152,14 +143,6 @@ ecosystem-sandbox/
 └── README.md
 ```
 
-### Testing
-```bash
-# Run backend tests
-cd backend && npm test
-
-# Run frontend tests
-cd frontend && npm test
-```
 
 ## 📄 License
 
