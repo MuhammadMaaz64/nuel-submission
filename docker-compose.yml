@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: ecosystem-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ecosystem-sandbox
+    networks:
+      - ecosystem-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ecosystem-backend
+    ports:
+      - "3000:3000"
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/ecosystem-sandbox
+      PORT: 3000
+      NODE_ENV: production
+      FRONTEND_URL: http://localhost:5173
+    depends_on:
+      - mongodb
+    networks:
+      - ecosystem-network
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ecosystem-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:3000
+    depends_on:
+      - backend
+    networks:
+      - ecosystem-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  mongodb_data:
+
+networks:
+  ecosystem-network:
+    driver: bridge
